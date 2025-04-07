@@ -1,0 +1,66 @@
+# Built files
+/build/
+/app/build/
+/.gradle/
+/captures/
+/.externalNativeBuild/
+.cxx/
+
+# Local configuration
+/local.properties
+*.iml
+.idea/
+*.ipr
+*.iws
+
+# Signing keys (keep secrets out!)
+*.jks
+*.keystore
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log & crash files
+*.log
+
+# Generated files
+gen/
+bin/
+out/
+
+# Gradle cache
+.gradle/
+build/
+
+# Android Studio specific
+.idea/
+*.iml
+/.idea/caches
+/.idea/libraries
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+/.idea/gradle.xml
+/.idea/misc.xml
+
+# Kotlin specific
+*.kotlin_module
+
+# IntelliJ
+*.iws
+*.ipr
+
+# Node (if using React Native or similar)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Proguard
+proguard/
+
+# Firebase / Crashlytics
+fabric.properties
+crashlytics-build.properties
+

@@ -1,0 +1,77 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+
+}
+
+android {
+    namespace 'com.example.mylibrary'
+    compileSdk 35
+
+    defaultConfig {
+        minSdk 21
+        targetSdk 36
+        versionCode 1
+        versionName "1.0.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile(
+                'proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+        publishing {
+            singleVariant('release') {
+                withSourcesJar()
+                withJavadocJar()
+            }
+            // ...
+
+    }
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.7.0'
+    testImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
+}
+afterEvaluate {
+    publishing {
+        publications {
+            mavenAndroid(MavenPublication) {
+                // Applies the component for the release build variant.
+                groupId = 'com.github.maina'
+                artifactId = 'androidlibsample'
+                version = '1.0.2'
+                from components.release
+
+            }
+        }
+        repositories {
+            maven {
+                name = "GitHubPackages"
+                url = uri("https://maven.pkg.github.com/maina/AndroidLibSample")
+                credentials {
+                    username = System.getenv("GITHUB_USERNAME")
+                    password = System.getenv("GITHUB_PERSONAL_TOKEN")
+                }
+            }
+        }
+    }
+}
+tasks.register('listComponents') {
+    doLast {
+        project.components.each { component ->
+            println "Component: ${component.name}"
+        }
+    }
+}
